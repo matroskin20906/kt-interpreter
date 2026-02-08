@@ -95,4 +95,79 @@ class LexerTest {
 
         testExpectedTokens(input, expectedTokens)
     }
+
+    @Test
+    fun `test lexer next token with boolean values`() {
+         val input = """
+             !-/*5;
+             5 < 10 > 5;
+             if (5 < 10) {
+                 return true;
+             } else {
+                 return false;
+             }
+         """.trimIndent()
+
+        val expectedTokens = listOf(
+            Token(TokenType.BANG, "!"),
+            Token(TokenType.MINUS, "-"),
+            Token(TokenType.SLASH, "/"),
+            Token(TokenType.ASTERISK, "*"),
+            Token(TokenType.INT, "5"),
+            Token(TokenType.SEMICOLON, ";"),
+
+            Token(TokenType.INT, "5"),
+            Token(TokenType.LT, "<"),
+            Token(TokenType.INT, "10"),
+            Token(TokenType.GT, ">"),
+            Token(TokenType.INT, "5"),
+            Token(TokenType.SEMICOLON, ";"),
+
+            Token(TokenType.IF, "if"),
+            Token(TokenType.LPAREN, "("),
+            Token(TokenType.INT, "5"),
+            Token(TokenType.LT, "<"),
+            Token(TokenType.INT, "10"),
+            Token(TokenType.RPAREN, ")"),
+            Token(TokenType.LBRACE, "{"),
+
+            Token(TokenType.RETURN, "return"),
+            Token(TokenType.TRUE, "true"),
+            Token(TokenType.SEMICOLON, ";"),
+
+            Token(TokenType.RBRACE, "}"),
+            Token(TokenType.ELSE, "else"),
+            Token(TokenType.LBRACE, "{"),
+
+            Token(TokenType.RETURN, "return"),
+            Token(TokenType.FALSE, "false"),
+            Token(TokenType.SEMICOLON, ";"),
+
+            Token(TokenType.RBRACE, "}"),
+        )
+
+        testExpectedTokens(input, expectedTokens)
+    }
+
+    @Test
+    fun `test lexer next token not equal, equal`() {
+        val input = """
+            10 == 10;
+            9 != 10;
+        """.trimIndent()
+
+        val expectedTokens = listOf(
+            Token(TokenType.INT, "10"),
+            Token(TokenType.EQUALS, "=="),
+            Token(TokenType.INT, "10"),
+            Token(TokenType.SEMICOLON, ";"),
+
+            Token(TokenType.INT, "9"),
+            Token(TokenType.NOT_EQUALS, "!="),
+            Token(TokenType.INT, "10"),
+            Token(TokenType.SEMICOLON, ";"),
+        )
+
+        testExpectedTokens(input, expectedTokens)
+    }
 }

@@ -9,6 +9,16 @@ enum class TokenType(val type: String) {
 
     ASSIGN("="),
     PLUS("+"),
+    MINUS("-"),
+    ASTERISK("*"),
+    SLASH("/"),
+
+    BANG("!"),
+
+    LT("<"),
+    GT(">"),
+    EQUALS("=="),
+    NOT_EQUALS("!="),
 
     COMMA(","),
     SEMICOLON(";"),
@@ -19,5 +29,10 @@ enum class TokenType(val type: String) {
     RBRACE("}"),
 
     FUNCTION("FUNCTION"),
-    LET("LET")
+    LET("LET"),
+    TRUE("TRUE"),
+    FALSE("FALSE"),
+    IF("IF"),
+    ELSE("ELSE"),
+    RETURN("RETURN"),
 }
