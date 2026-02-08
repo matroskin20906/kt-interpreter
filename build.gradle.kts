@@ -1,5 +1,10 @@
 plugins {
     kotlin("jvm") version "2.3.0"
+    application
+}
+
+application {
+    mainClass.set("org.example.MainKt")
 }
 
 group = "org.example"
@@ -19,4 +24,10 @@ kotlin {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "org.example.MainKt"
+    }
 }
